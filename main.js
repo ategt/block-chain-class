@@ -32,7 +32,7 @@ class Blockchain {
 	}
 
 	createGenesisBlock() {
-		//return new Block('12:00', "Hello");
+		//return new Block('12:00', "Hello");  // This is what Pat used, and I do not have versioning for this yet.
 		return new Block("01/01/2017", "Genesis block", "0");
 	}
 
@@ -46,19 +46,29 @@ class Blockchain {
 
 		this.chain.push(newBlock);
 	}
+
+	isChainValid(){
+		for (let i = 1; i < this.chain.length; i++){
+			const currentBlock = this.chain[i];
+			const previousBlock = this.chain[i - 1];
+		}
+
+		if (currentBlock.hash !== currentBlock.calculateHash()) {
+			return false;
+		}
+
+		if (currentBlock.previousHash !== previousBlock.hash) {
+			return false;
+		}
+
+		if(this.chain[0] !== this.createGenesisBlock()){
+			return false;
+		}
+
+		return true;
+	}
 }
 
-// const blockChain = new Blockchain();
-
-// //console.log(blockChain.createGenesisBlock());
-
-// //const firstBlock = new Block('12:00', "Hello");
-// const secondBlock = new Block('1:00', "Bye", firstBlock.hash);
-
-// blockChain.addBlock(secondBlock);
-
-// console.log(firstBlock.hash);
-// console.log(secondBlock.hash);
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined'){
     module.exports =  { Block, Blockchain };
