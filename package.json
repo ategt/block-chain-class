@@ -1,0 +1,14 @@
+{
+  "name": "blockchain",
+  "version": "1.0.0",
+  "description": "This is my following alongs of a build your own simplified blockchain using javascript. Pat lead the tutorial.",
+  "main": "main.js",
+  "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "tape": "^4.10.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "tape main.tests.js"
+  }
+}
