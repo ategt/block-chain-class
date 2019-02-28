@@ -51,16 +51,10 @@ class Blockchain {
 			const currentBlock = this.chain[i];
 			const previousBlock = this.chain[i - 1];
 
-			if (currentBlock.hash !== currentBlock.calculateHash()) {
-				return false;
-			}
-
-			if (currentBlock.previousHash !== previousBlock.hash) {
-				return false;
-			}
-
-			if (this.chain[0] !== this.createGenesisBlock()){
-				return false;
+			if ((currentBlock.hash !== currentBlock.calculateHash()) ||
+				(currentBlock.previousHash !== previousBlock.hash)   ||
+				(this.chain[0] !== this.createGenesisBlock())) {
+					return false;
 			}
 		}
 
