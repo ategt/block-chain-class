@@ -49,13 +49,16 @@ class Blockchain {
 	}
 
 	isChainValid(){
+		if (JSON.stringify(this.createGenesisBlock()) !== JSON.stringify(this.chain[0])) {
+			return false;
+		}
+
 		for (let i = 1; i < this.chain.length; i++){
 			const currentBlock = this.chain[i];
 			const previousBlock = this.chain[i - 1];
 
 			if ((currentBlock.hash !== currentBlock.calculateHash()) ||
-				(currentBlock.previousHash !== previousBlock.hash)   ||
-				(this.chain[0] !== this.createGenesisBlock())) {
+				(currentBlock.previousHash !== previousBlock.hash)) {
 
 				if (currentBlock.hash !== currentBlock.calculateHash()) {
 					console.warn(1);
