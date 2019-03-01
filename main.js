@@ -44,43 +44,30 @@ class Blockchain {
 		this.chain.push(newBlock);
 	}
 
-	compareBlocks(otherBlock) {
-		
+	_isCompareBlocks(previousBlock, currentBlock) {
+		return (currentBlock.hash === currentBlock.calculateHash() &&
+				(currentBlock.previousHash === previousBlock.hash));
 	}
 
-	isChainValid(){
-		if (JSON.stringify(this.createGenesisBlock()) !== JSON.stringify(this.chain[0])) {
-			return false;
-		}
-
+	_isBlockSequenceValid() {
 		for (let i = 1; i < this.chain.length; i++){
 			const currentBlock = this.chain[i];
 			const previousBlock = this.chain[i - 1];
 
-			if ((currentBlock.hash !== currentBlock.calculateHash()) ||
-				(currentBlock.previousHash !== previousBlock.hash)) {
-
-				if (currentBlock.hash !== currentBlock.calculateHash()) {
-					console.warn(1);
-				}
-
-				if (currentBlock.previousHash !== previousBlock.hash) {
-					console.warn(2);
-				}
-
-				if (this.chain[0] !== this.createGenesisBlock()) {
-					console.warn(3);
-					console.warn(this.chain[0]);
-					console.warn(this.createGenesisBlock());
-					console.warn(JSON.stringify(this.createGenesisBlock()) === JSON.stringify(this.chain[0]));
-					console.warn(this.createGenesisBlock() === this.chain[0]);
-				}
-			
-					return false;
+			if (!this._isCompareBlocks(previousBlock, currentBlock)) {
+				return false;
 			}
 		}
 
 		return true;
+	}
+
+	_isGenesisBlockValid() {
+		return JSON.stringify(this.createGenesisBlock()) === JSON.stringify(this.chain[0]);
+	}
+
+	isChainValid(){
+		return this._isGenesisBlockValid() && this._isBlockSequenceValid();
 	}
 }
 
