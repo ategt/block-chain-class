@@ -39,24 +39,11 @@ test('The block chain should accept new blocks, give the appropriate last block,
 	blockchain.addBlock(secondBlock);
 
 	assert.equal(blockchain.getLatestBlock().hash, "fd6cd59f857dec12012a0c50d5c830b9122fd5598c520e3f3d9b6fbf660521e2");
+	assert.equal(blockchain.isChainValid(), true);
 
 	assert.end();
 });
 
-test('The block chain should accept new blocks, give the appropriate last block, and self validate as valid.', (assert) => {
-	const blockchain = new Blockchain();
-
-	const firstBlock = new Block('12:00', "Hello");
-	const secondBlock = new Block('1:00', "Bye");
-
-	blockchain.addBlock(firstBlock);
-	blockchain.addBlock(secondBlock);
-
-	assert.equal(blockchain.getLatestBlock().hash, "fd6cd59f857dec12012a0c50d5c830b9122fd5598c520e3f3d9b6fbf660521e2");
-	assert.equal(blockchain.getLatestBlock().hash, "fd6cd59f857dec12012a0c50d5c830b9122fd5598c520e3f3d9b6fbf660521e2");
-
-	assert.end();
-});
 
 test('The block chain should fail to self validate if any of the blocks are tampered with.', (assert) => {
 	const blockchain = new Blockchain();
@@ -66,8 +53,7 @@ test('The block chain should fail to self validate if any of the blocks are tamp
 
 	blockchain.chain[1].data = "bonjour";
 
-	console.log('Blockchain valid? ' + savjeeCoin.isChainValid()); // will return false!
-	assert.equal(blockchain.getLatestBlock().hash, "fd6cd59f857dec12012a0c50d5c830b9122fd5598c520e3f3d9b6fbf660521e2");
+	assert.equal(blockchain.isChainValid(), false);
 
 	assert.end();
 });

@@ -6,9 +6,7 @@ class Block {
 		this.timestamp = timestamp;
 		this.data = data;
 
-		const calculateHash = this.calculateHash.bind(this);
-
-		this.hash = calculateHash();
+		this.hash = this.calculateHash();
 	}
 
 	calculateHash(){
@@ -54,6 +52,23 @@ class Blockchain {
 			if ((currentBlock.hash !== currentBlock.calculateHash()) ||
 				(currentBlock.previousHash !== previousBlock.hash)   ||
 				(this.chain[0] !== this.createGenesisBlock())) {
+
+				if (currentBlock.hash !== currentBlock.calculateHash()) {
+					console.warn(1);
+				}
+
+				if (currentBlock.previousHash !== previousBlock.hash) {
+					console.warn(2);
+				}
+
+				if (this.chain[0] !== this.createGenesisBlock()) {
+					console.warn(3);
+					console.warn(this.chain[0]);
+					console.warn(this.createGenesisBlock());
+					console.warn(JSON.stringify(this.createGenesisBlock()) === JSON.stringify(this.chain[0]));
+					console.warn(this.createGenesisBlock() === this.chain[0]);
+				}
+			
 					return false;
 			}
 		}
@@ -61,7 +76,6 @@ class Blockchain {
 		return true;
 	}
 }
-
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined'){
     module.exports =  { Block, Blockchain };
