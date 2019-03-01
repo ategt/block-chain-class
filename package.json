@@ -5,9 +5,14 @@
   "main": "main.js",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
+    "elliptic": "^6.4.1"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.3",
+    "eslint": "^5.14.1",
+    "nyc": "^13.3.0",
     "tape": "^4.10.1"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "tape main.tests.js"
   }
