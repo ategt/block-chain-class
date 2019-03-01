@@ -44,6 +44,10 @@ class Blockchain {
 		this.chain.push(newBlock);
 	}
 
+	compareBlocks(otherBlock) {
+		
+	}
+
 	isChainValid(){
 		for (let i = 1; i < this.chain.length; i++){
 			const currentBlock = this.chain[i];
