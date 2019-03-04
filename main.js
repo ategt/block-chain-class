@@ -53,10 +53,7 @@ class Blockchain {
 
     addBlock(newBlock) {
         newBlock.previousHash = this.getLatestBlock().hash;
-        const hx = newBlock.mineBlock(this.difficulty);
-        console.log(`Mine Hash: ${hx}`);
-        newBlock.hash = newBlock.calculateHash();
-        console.log(`Block Hash: ${newBlock.hash}`);
+        newBlock.hash = newBlock.mineBlock(this.difficulty);
 
         this.chain.push(newBlock);
     }

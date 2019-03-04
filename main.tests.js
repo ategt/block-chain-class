@@ -47,21 +47,30 @@ test("The blockchain should initialize with one block, matching the provided has
     assert.end();
 });
 
+test("The blockchain, havong difficulty of 1, should initialize with one block, matching the provided hash, which getLatestBlock should return.", (assert) => {
+    const blockchain = new Blockchain();
+    blockchain.difficulty = 1;
+
+    assert.equal(blockchain.getLatestBlock().hash, "2fce63c19c9e4f7862a2bf4ccbdb82dc7918e5b8eab9cf6166484063d105c443");
+
+    assert.end();
+});
+
 test("The block chain should accept new blocks, give the appropriate last block, and self validate as valid.", (assert) => {
     const blockchain = new Blockchain();
-    blockchain.difficulty = 0;
+    blockchain.difficulty = 1;
 
     const firstBlock = new Block("12:00", "Hello");
     const secondBlock = new Block("1:00", "Bye");
 
     blockchain.addBlock(firstBlock);
 
-    assert.equal(blockchain.getLatestBlock().hash, "38e3514b32b186df83fed1ad89c28bd1457401de7a799d79cbd82201df5226f7");
+    assert.equal(blockchain.getLatestBlock().hash, "04fcfbbab2764fe7f1743533bd3db6fa9a7cf9cbe34e6546908bd5496fbea874");
     assert.equal(blockchain.isChainValid(), true);
 
     blockchain.addBlock(secondBlock);
 
-    assert.equal(blockchain.getLatestBlock().hash, "f982d112ec6636450334d40e95b6383e4fdf1d30b603032182061ed76ca7cd04");
+    assert.equal(blockchain.getLatestBlock().hash, "09e1f8c321c9d11d81fb77c0c98fb269f401dd526a48e690c2b959cd14e588d4");
     assert.equal(blockchain.isChainValid(), true);
 
     assert.end();
