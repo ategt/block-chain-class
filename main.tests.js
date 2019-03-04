@@ -102,15 +102,14 @@ test("The block chain mining test.", (assert) => {
     assert.equal(blockchain.difficulty, 3);
 
     blockchain.addBlock(new Block("12:00", "Hello"));
+    assert.equal(blockchain.getLatestBlock().hash.substring(0, 3), "000");
     blockchain.addBlock(new Block("1:00", "Bye"));
-
-    blockchain.chain[1].data = "bonjour";
-    blockchain.chain[1].hash = blockchain.chain[1].calculateHash();    
+    assert.equal(blockchain.getLatestBlock().hash.substring(0, 3), "000");
 
     assert.end();
 });
 
-test("The block chain mining test.", (assert) => {
+test("The block chain harder mining test.", (assert) => {
     const blockchain = new Blockchain();
     blockchain.difficulty = 4;
 
@@ -126,9 +125,3 @@ test("The block chain mining test.", (assert) => {
 
     assert.end();
 });
-// let savjeeCoin = new Blockchain();
-// console.log('Mining block 1...');
-// savjeeCoin.addBlock(new Block(1, "20/07/2017", { amount: 4 }));
-
-// console.log('Mining block 2...');
-// savjeeCoin.addBlock(new Block(2, "20/07/2017", { amount: 8 }));
