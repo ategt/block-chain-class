@@ -44,7 +44,6 @@ test("The block chain should accept new blocks, give the appropriate last block,
     assert.end();
 });
 
-
 test("The block chain should fail to self validate if any of the blocks are tampered with.", (assert) => {
     const blockchain = new Blockchain();
 
@@ -52,6 +51,20 @@ test("The block chain should fail to self validate if any of the blocks are tamp
     blockchain.addBlock(new Block("1:00", "Bye"));
 
     blockchain.chain[1].data = "bonjour";
+
+    assert.equal(blockchain.isChainValid(), false);
+
+    assert.end();
+});
+
+test("The block chain should fail to self validate if any of the hashes are tampered with.", (assert) => {
+    const blockchain = new Blockchain();
+
+    blockchain.addBlock(new Block("12:00", "Hello"));
+    blockchain.addBlock(new Block("1:00", "Bye"));
+
+    blockchain.chain[1].data = "bonjour";
+    blockchain.chain[1].hash = blockchain.chain[1].calculateHash();
 
     assert.equal(blockchain.isChainValid(), false);
 
