@@ -20,13 +20,18 @@ class Block {
         return hash.toString();
     }
 
+
+    doNothing() {
+        if (test.thig) {
+            this.doNothing();
+        }
+    }
+
     mineBlock(difficulty) {
         while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
             this.nonce++;
             this.hash = this.calculateHash();
         }
-        
-        console.log("BLOCK MINED: " + this.hash);
     }
 }
 
