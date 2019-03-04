@@ -30,7 +30,7 @@ test("The hashes should match Pat's hashes.", (assert) => {
 
 test("The chain structure should match the example output.", (assert) => {
     const blockchain = new Blockchain();
-    blockchain.difficulty = 0
+    blockchain.difficulty = 0;
 
     assert.equal(JSON.stringify(blockchain), '{"chain":[{"previousHash":"0","timestamp":"01/01/2017","data":"Genesis block","hash":"2fce63c19c9e4f7862a2bf4ccbdb82dc7918e5b8eab9cf6166484063d105c443","nonce":0}],"difficulty":0}');
 
@@ -40,7 +40,7 @@ test("The chain structure should match the example output.", (assert) => {
 
 test("The blockchain should initialize with one block, matching the provided hash, which getLatestBlock should return.", (assert) => {
     const blockchain = new Blockchain();
-    blockchain.difficulty = 0
+    blockchain.difficulty = 0;
 
     assert.equal(blockchain.getLatestBlock().hash, "2fce63c19c9e4f7862a2bf4ccbdb82dc7918e5b8eab9cf6166484063d105c443");
 
@@ -49,7 +49,7 @@ test("The blockchain should initialize with one block, matching the provided has
 
 test("The block chain should accept new blocks, give the appropriate last block, and self validate as valid.", (assert) => {
     const blockchain = new Blockchain();
-    blockchain.difficulty = 0
+    blockchain.difficulty = 0;
 
     const firstBlock = new Block("12:00", "Hello");
     const secondBlock = new Block("1:00", "Bye");
@@ -69,7 +69,7 @@ test("The block chain should accept new blocks, give the appropriate last block,
 
 test("The block chain should fail to self validate if any of the blocks are tampered with.", (assert) => {
     const blockchain = new Blockchain();
-    blockchain.difficulty = 0
+    blockchain.difficulty = 0;
 
     blockchain.addBlock(new Block("12:00", "Hello"));
     blockchain.addBlock(new Block("1:00", "Bye"));
@@ -83,7 +83,7 @@ test("The block chain should fail to self validate if any of the blocks are tamp
 
 test("The block chain should fail to self validate if any of the hashes are tampered with.", (assert) => {
     const blockchain = new Blockchain();
-    blockchain.difficulty = 0
+    blockchain.difficulty = 0;
 
     blockchain.addBlock(new Block("12:00", "Hello"));
     blockchain.addBlock(new Block("1:00", "Bye"));
@@ -103,6 +103,7 @@ test("The block chain mining test.", (assert) => {
 
     blockchain.addBlock(new Block("12:00", "Hello"));
     assert.equal(blockchain.getLatestBlock().hash.substring(0, 3), "000");
+
     blockchain.addBlock(new Block("1:00", "Bye"));
     assert.equal(blockchain.getLatestBlock().hash.substring(0, 3), "000");
 
