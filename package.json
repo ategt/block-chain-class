@@ -21,6 +21,7 @@
   "scripts": {
     "test": "tape main.tests.js",
     "lint": "eslint main*.js",
+    "lint-fx": "eslint --fix main*.js",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   }
 }

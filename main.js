@@ -26,7 +26,7 @@ class Block {
             this.hash = this.calculateHash();
         }
         
-      console.log("BLOCK MINED: " + this.hash);
+        console.log("BLOCK MINED: " + this.hash);
     }
 }
 
