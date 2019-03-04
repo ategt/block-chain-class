@@ -21,10 +21,14 @@ class Block {
     }
 
     mineBlock(difficulty) {
-        while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
+        const hashPreamble = Array(difficulty + 1).join("0");
+
+        while (this.hash.substring(0, difficulty) !== hashPreamble) {
             this.nonce++;
             this.hash = this.calculateHash();
         }
+
+        return this.hash;
     }
 }
 
@@ -49,8 +53,10 @@ class Blockchain {
 
     addBlock(newBlock) {
         newBlock.previousHash = this.getLatestBlock().hash;
-        newBlock.mineBlock(this.difficulty);
+        const hx = newBlock.mineBlock(this.difficulty);
+        console.log(`Mine Hash: ${hx}`);
         newBlock.hash = newBlock.calculateHash();
+        console.log(`Block Hash: ${newBlock.hash}`);
 
         this.chain.push(newBlock);
     }
